@@ -1,2 +1,3 @@
 rootProject.name='Android Tools'
 include ':app'
+include ':CommonLibrary'
