@@ -1,4 +1,4 @@
-package com.example.commonlibrary;
+package com.boluomi.commonlibrary;
 
 import org.junit.Test;
 

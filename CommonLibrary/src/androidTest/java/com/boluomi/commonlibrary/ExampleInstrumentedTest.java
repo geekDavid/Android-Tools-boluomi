@@ -1,4 +1,4 @@
-package com.example.commonlibrary;
+package com.boluomi.commonlibrary;
 
 import android.content.Context;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
