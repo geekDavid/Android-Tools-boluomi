@@ -25,6 +25,9 @@ public final class MLog {
     print(tag, LogType.WARNING, logs);
   }
 
+  public static void e(String tag, Throwable throwable) {
+    e(tag, throwable.getMessage());
+  }
   public static void e(String tag, String log, Throwable throwable) {
     e(tag, log, throwable.getMessage());
   }
