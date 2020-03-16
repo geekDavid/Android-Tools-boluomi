@@ -7,9 +7,7 @@ public class MainActivity extends CommonActivity {
   private static final String TAG = "MainActivity";
 
   @Override
-  protected void initData() {
-    showLoadingDialog();
-  }
+  protected void initData() {}
 
   @Override
   protected int getLayoutId() {
