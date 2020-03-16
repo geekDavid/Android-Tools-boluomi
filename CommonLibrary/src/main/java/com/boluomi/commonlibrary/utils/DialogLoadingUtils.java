@@ -29,14 +29,14 @@ public class DialogLoadingUtils {
   public static Dialog createLoadingDialog(Context context, String msg) {
     LayoutInflater inflater = LayoutInflater.from(context);
     // 得到加载view
-    View view = inflater.inflate(R.layout.dialog_loading, null);
+    View loadingView = inflater.inflate(R.layout.dialog_loading, null);
     // 加载布局
-    LinearLayout layout = view.findViewById(R.id.dialog_loading_view);
+    LinearLayout llLoadingContent = loadingView.findViewById(R.id.ll_loadingContent);
     // 提示文字
-    TextView tipTextView = view.findViewById(R.id.tipTextView);
+    TextView tvShowMes = loadingView.findViewById(R.id.tv_showMes);
     if (!TextUtils.isEmpty(msg)) {
       // 设置加载信息
-      tipTextView.setText(msg);
+      tvShowMes.setText(msg);
     }
     // 创建自定义样式dialog
     Dialog loadingDialog = new Dialog(context, R.style.LoadingDialog);
@@ -46,16 +46,19 @@ public class DialogLoadingUtils {
     loadingDialog.setCanceledOnTouchOutside(false);
     // 设置布局
     loadingDialog.setContentView(
-        layout,
+        llLoadingContent,
         new LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
     // 将显示Dialog的方法封装在这里面
     Window window = loadingDialog.getWindow();
-    WindowManager.LayoutParams lp = window.getAttributes();
-    lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-    lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-    window.setGravity(Gravity.CENTER);
-    window.setAttributes(lp);
+    WindowManager.LayoutParams lp;
+    if (window != null) {
+      lp = window.getAttributes();
+      lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+      lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+      window.setGravity(Gravity.CENTER);
+      window.setAttributes(lp);
+    }
     loadingDialog.show();
     return loadingDialog;
   }

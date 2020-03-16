@@ -30,7 +30,7 @@ public abstract class CommonActivity<DBinding extends ViewDataBinding, VModel ex
     extends AppCompatActivity {
 
   private static final String TAG = "CommonActivity";
-  protected DBinding mDatabinding;
+  protected DBinding mDataBinding;
   protected VModel mViewModel;
   private Dialog mLoadingDialog;
 
@@ -39,7 +39,7 @@ public abstract class CommonActivity<DBinding extends ViewDataBinding, VModel ex
     super.onCreate(savedInstanceState);
     ActivityTaskManager.getInstance().put(this);
     ScreenManager.SCREEN(this);
-    mDatabinding = initDataBinding();
+    mDataBinding = initDataBinding();
     initData();
   }
 
@@ -60,10 +60,10 @@ public abstract class CommonActivity<DBinding extends ViewDataBinding, VModel ex
   protected abstract @LayoutRes int getLayoutId();
 
   protected DBinding initDataBinding() {
-    mDatabinding = DataBindingUtil.setContentView(this, getLayoutId());
+    mDataBinding = DataBindingUtil.setContentView(this, getLayoutId());
     mViewModel = initViewModel();
     initObserve();
-    return mDatabinding;
+    return mDataBinding;
   }
 
   /** 监听当前ViewModel中 showDialog和error的值 */
@@ -77,9 +77,9 @@ public abstract class CommonActivity<DBinding extends ViewDataBinding, VModel ex
           @Override
           public void onChanged(DialogBean bean) {
             if (bean.isShow()) {
-              showDialog(bean.getMsg());
+              showLoadingDialog(bean.getMsg());
             } else {
-              dismissDialog();
+              dismissLoadingDialog();
             }
           }
         });
@@ -93,18 +93,19 @@ public abstract class CommonActivity<DBinding extends ViewDataBinding, VModel ex
         });
   }
 
-  /**
-   * 显示用户等待框
-   *
-   * @param msg 提示信息
-   */
-  protected void showDialog(String msg) {
+  /** 显示用户等待框 */
+  protected void showLoadingDialog() {
+    showLoadingDialog("");
+  }
+
+  /** 显示用户等待框 */
+  protected void showLoadingDialog(String msg) {
     mLoadingDialog = DialogLoadingUtils.createLoadingDialog(this, msg);
     mLoadingDialog.show();
   }
 
   /** 隐藏等待框 */
-  protected void dismissDialog() {
+  protected void dismissLoadingDialog() {
     if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
       mLoadingDialog.dismiss();
       mLoadingDialog = null;
