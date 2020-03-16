@@ -19,14 +19,21 @@ import com.boluomi.commonlibrary.R;
  */
 public class DialogLoadingUtils {
 
+  /**
+   * 创建dialog
+   *
+   * @param context 上下文
+   * @param msg 显示的加载中的文字
+   * @return dialog
+   */
   public static Dialog createLoadingDialog(Context context, String msg) {
     LayoutInflater inflater = LayoutInflater.from(context);
     // 得到加载view
-    View v = inflater.inflate(R.layout.dialog_loading, null);
+    View view = inflater.inflate(R.layout.dialog_loading, null);
     // 加载布局
-    LinearLayout layout = v.findViewById(R.id.dialog_loading_view);
+    LinearLayout layout = view.findViewById(R.id.dialog_loading_view);
     // 提示文字
-    TextView tipTextView = v.findViewById(R.id.tipTextView);
+    TextView tipTextView = view.findViewById(R.id.tipTextView);
     if (!TextUtils.isEmpty(msg)) {
       // 设置加载信息
       tipTextView.setText(msg);
@@ -53,6 +60,7 @@ public class DialogLoadingUtils {
     return loadingDialog;
   }
 
+  /** 创建dialog */
   public static Dialog createLoadingDialog(Context context) {
     return createLoadingDialog(context, "");
   }

@@ -16,37 +16,37 @@ import io.reactivex.disposables.Disposable;
 public abstract class BaseViewModel extends ViewModel {
 
   /** 管理RxJava请求 */
-  private CompositeDisposable compositeDisposable;
+  private CompositeDisposable mCompositeDisposable;
   /** 用来通知 Activity／Fragment 是否显示等待Dialog */
-  protected DialogLiveData<DialogBean> showDialog = new DialogLiveData<>();
+  protected DialogLiveData<DialogBean> mShowDialog = new DialogLiveData<>();
   /** 当ViewModel层出现错误需要通知到Activity／Fragment */
-  protected MutableLiveData<Object> error = new MutableLiveData<>();
+  protected MutableLiveData<Object> mError = new MutableLiveData<>();
 
   /** 添加 rxJava 发出的请求 */
   protected void addDisposable(Disposable disposable) {
-    if (compositeDisposable == null || compositeDisposable.isDisposed()) {
-      compositeDisposable = new CompositeDisposable();
+    if (mCompositeDisposable == null || mCompositeDisposable.isDisposed()) {
+      mCompositeDisposable = new CompositeDisposable();
     }
-    compositeDisposable.add(disposable);
+    mCompositeDisposable.add(disposable);
   }
 
   public void getShowDialog(LifecycleOwner owner, Observer<DialogBean> observer) {
-    showDialog.observe(owner, observer);
+    mShowDialog.observe(owner, observer);
   }
 
   public void getError(LifecycleOwner owner, Observer<Object> observer) {
-    error.observe(owner, observer);
+    mError.observe(owner, observer);
   }
 
   /** ViewModel销毁同时也取消请求 */
   @Override
   protected void onCleared() {
     super.onCleared();
-    if (compositeDisposable != null) {
-      compositeDisposable.dispose();
-      compositeDisposable = null;
+    if (mCompositeDisposable != null) {
+      mCompositeDisposable.dispose();
+      mCompositeDisposable = null;
     }
-    showDialog = null;
-    error = null;
+    mShowDialog = null;
+    mError = null;
   }
 }

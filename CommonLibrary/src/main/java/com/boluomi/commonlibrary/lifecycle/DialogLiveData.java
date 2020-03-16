@@ -10,17 +10,17 @@ import com.boluomi.commonlibrary.bean.DialogBean;
  */
 public final class DialogLiveData<T> extends MutableLiveData<T> {
 
-  private DialogBean bean = new DialogBean();
+  private DialogBean mDialogBean = new DialogBean();
 
   public void setValue(boolean isShow) {
-    bean.setShow(isShow);
-    bean.setMsg("");
-    setValue((T) bean);
+    mDialogBean.setShow(isShow);
+    mDialogBean.setMsg("");
+    setValue((T) mDialogBean);
   }
 
   public void setValue(boolean isShow, String msg) {
-    bean.setShow(isShow);
-    bean.setMsg(msg);
-    setValue((T) bean);
+    mDialogBean.setShow(isShow);
+    mDialogBean.setMsg(msg);
+    setValue((T) mDialogBean);
   }
 }

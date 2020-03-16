@@ -14,6 +14,7 @@ import com.boluomi.commonlibrary.lifecycle.BaseViewModel;
 import com.boluomi.commonlibrary.manager.ActivityTaskManager;
 import com.boluomi.commonlibrary.manager.ScreenManager;
 import com.boluomi.commonlibrary.utils.DialogLoadingUtils;
+import com.boluomi.commonlibrary.utils.MLog;
 import java.lang.reflect.ParameterizedType;
 
 /**
@@ -51,7 +52,7 @@ public abstract class CommonActivity<DBinding extends ViewDataBinding, VModel ex
       Class<VModel> clazz = (Class<VModel>) pt.getActualTypeArguments()[1];
       mViewModel = ViewModelProviders.of(this).get(clazz);
     } catch (Exception e) {
-      throw new RuntimeException(e);
+      MLog.i(TAG, e.getMessage());
     }
     return mViewModel;
   }

@@ -1,20 +1,13 @@
 package com.boluomi.androidtools.activity;
 
 import com.boluomi.androidtools.R;
-import com.boluomi.androidtools.databinding.ActivityMainBinding;
 import com.boluomi.commonlibrary.CommonActivity;
-import com.boluomi.commonlibrary.utils.MLog;
 
-public class MainActivity extends CommonActivity<ActivityMainBinding, TestViewModel> {
+public class MainActivity extends CommonActivity {
   private static final String TAG = "MainActivity";
 
   @Override
-  protected void initData() {
-    mDatabinding.setModel(mViewModel);
-    mDatabinding.setLifecycleOwner(this);
-    mViewModel.requestData();
-    mViewModel.getProgress().setValue("10");
-  }
+  protected void initData() {}
 
   @Override
   protected int getLayoutId() {
@@ -22,7 +15,5 @@ public class MainActivity extends CommonActivity<ActivityMainBinding, TestViewMo
   }
 
   @Override
-  protected void showError(Object obj) {
-    MLog.i(TAG, "obj" + obj.toString());
-  }
+  protected void showError(Object obj) {}
 }
